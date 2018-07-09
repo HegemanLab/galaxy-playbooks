@@ -1,1 +1,7 @@
-Create a directory in repo named `roles`. Then clone [ansible-galaxy](https://github.com/galaxyproject/ansible-galaxy.git) to that ffolder and rename it to `galaxy`--or make symbolic link to repo elsewhere.
+For EL 7.5
+
+Before running playbook:
+```
+ansible-galaxy install galaxyproject.galaxy
+ansible-galaxy install galaxyproject.postgresql
+```
