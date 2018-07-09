@@ -1,0 +1,22 @@
+- hosts: galaxy-test
+  vars:
+    galaxy_server_dir: /srv/galaxy
+  pre_tasks:
+    - name: Install Dependencies
+      yum:
+        name: "{{ item }}"
+      become: yes
+      with_items:
+        - git
+        - vim
+        - python-virtualenv
+    - name: Create galaxy server directory
+      file:
+        path: "{{ galaxy_server_dir }}"
+        state: directory
+        owner: galaxy
+        group: galaxy
+        mode: 0755
+      become: yes
+  roles:
+    - galaxy
