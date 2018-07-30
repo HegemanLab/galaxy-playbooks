@@ -1,0 +1,8 @@
+[submodule "roles/ansible-galaxy"]
+	path = roles/galaxy
+	url = https://github.com/eslerm/ansible-galaxy.git
+	branch = master
+[submodule "roles/ansible-postgresql"]
+	path = roles/postgresql
+	url = https://github.com/eslerm/ansible-postgresql.git
+	branch = master
