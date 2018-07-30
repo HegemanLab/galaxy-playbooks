@@ -1,4 +1,4 @@
-- hosts: galaxy-test
+- hosts: galaxy-host
   vars:
     galaxy_config_style: yaml
     galaxy_server_dir: /srv/galaxy/server

@@ -1,4 +1,4 @@
-[galaxy-test]
+[galaxy-host]
 123.123.123.123
 
 [galaxy-test:vars]
