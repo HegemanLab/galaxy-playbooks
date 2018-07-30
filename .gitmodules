@@ -6,3 +6,7 @@
 	path = roles/postgresql
 	url = https://github.com/eslerm/ansible-postgresql.git
 	branch = master
+[submodule "roles/ansible-postgresql-objects"]
+	path = roles/postgresql-objects
+	url = https://github.com/natefoo/ansible-postgresql-objects.git
+	branch = master
