@@ -1,61 +1,53 @@
-- hosts: galaxy-host
+---
+
+- name: Install and manage PostgreSQL
+  hosts: galaxy-host
+  remote_user: "{{ remote_user }}"
+  pre_tasks:
+    - name: Install psycopg2
+      yum:
+        name: python-psycopg2
+      become: yes
+  roles:
+    - postgresql
+  tags: postgres
+
+- name: Manage PostgreSQL users, groups, databases, and permissions
+  hosts: galaxy-host
   vars:
-    galaxy_config_style: yaml
-    galaxy_server_dir: /srv/galaxy/server
-    galaxy_config_dir: /srv/galaxy/config
-    galaxy_shed_tools_dir: /srv/galaxy/shed_tools
-    galaxy_mutable_config_dir: /var/galaxy/config
-    galaxy_mutable_data_dir: /var/galaxy/data
-    galaxy_commit_id: release_18.05
     postgresql_objects_users:
       - name: galaxy
         password: null
     postgresql_objects_databases:
       - name: galaxy
         owner: galaxy
+  remote_user: "{{ remote_user }}"
+  become: yes
+  become_user: postgres
+  roles:
+    - postgresql-objects
+  tags: postgres
+
+- name: Install and manage nginx
+  hosts: galaxy-host
+  remote_user: "{{ remote_user }}"
+  roles:
+    - nginx
+  tags: nginx
+
+- name: Install Galaxy
+  hosts: galaxy-host
+  vars:
+    galaxy_server_dir: /srv/galaxy/server
+    galaxy_config_dir: /srv/galaxy/config
+    galaxy_mutable_server_dir: /var/galaxy/server
+    galaxy_mutable_config_dir: /var/galaxy/config
+    galaxy_config_style: yaml
     galaxy_config:
-      uwsgi:
-        socket: 127.0.0.1:4001
-        buffer-size: 16384
-        processes: 1
-        threads: 4
-        offload-threads: 2
-        static-map:
-          - /static/style={{ galaxy_server_dir }}/static/style/blue
-          - /static={{ galaxy_server_dir }}/static
-        master: true
-        virtualenv: "{{ galaxy_venv_dir }}"
-        pythonpath: "{{ galaxy_server_dir }}/lib"
-        module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
-        thunder-lock: true
-        die-on-term: true
-        hook-master-start:
-          - unix_signal:2 gracefully_kill_them_all
-          - unix_signal:15 gracefully_kill_them_all
-        py-call-osafterfork: true
-        enable-threads: true
-        mule: lib/galaxy/main.py
-        mule: lib/galaxy/main.py
-        farm: job-handlers:1,2
       galaxy:
+        admin_users: eslerm@umn.edu
         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
   pre_tasks:
-    - name: Create Galaxy code owner user
-      user:
-        name: gxcode
-        comment: "Galaxy Code"
-        system: yes
-        home: /srv/galaxy
-        createhome: yes
-      become: yes
-    - name: Create Galaxy runtime user
-      user:
-        name: galaxy
-        comment: "Galaxy Server"
-        system: yes
-        home: /var/galaxy
-        createhome: yes
-      become: yes
     - name: Install Dependencies
       yum:
         name: "{{ item }}"
@@ -63,36 +55,9 @@
       with_items:
         - git
         - vim
-        - python-psycopg2
         - python-virtualenv
-    - name: Create galaxy server directory
-      file:
-        path: "/srv/galaxy"
-        state: directory
-        owner: gxcode
-        group: gxcode
-        mode: 0755
-      become: yes
-    - name: Create mutable galaxy server directory
-      file:
-        path: "/var/galaxy"
-        state: directory
-        owner: galaxy
-        group: galaxy
-        mode: 0755
-      become: yes
   roles:
-    - postgresql
-    - role: natefoo.postgresql_objects
-      become: yes
-      become_user: postgres
-    - role: galaxy
-      become: yes
-      become_user: gxcode
-      galaxy_manage_mutable_setup: no
-      galaxy_manage_database: no
     - role: galaxy
       become: yes
       become_user: galaxy
-      galaxy_manage_clone: no
-      galaxy_manage_static_setup: no
+  tags: galaxy
