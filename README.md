@@ -14,9 +14,8 @@ This repo will contain several playbooks for deploying Galaxy servers in the Heg
 Currently, roles must be linked or downloaded to the `roles/` folder for playbooks to work. Rename every role to remove the prepended `ansible-`.
 
 Roles:
-[https://github.com/HegemanLab/ansible-galaxy](https://github.com/HegemanLab/ansible-galaxy)
-[https://github.com/HegemanLab/ansible-galaxy-os](https://github.com/HegemanLab/ansible-galaxy-os)
-[https://github.com/HegemanLab/ansible-nginx](https://github.com/HegemanLab/ansible-nginx)
-[https://github.com/HegemanLab/ansible-postgresql](https://github.com/HegemanLab/ansible-postgresql)
-[https://github.com/HegemanLab/ansible-postgresql-objects](https://github.com/HegemanLab/ansible-postgresql-objects)
-
+- [ansible-galaxy](https://github.com/HegemanLab/ansible-galaxy)
+- [ansible-galaxy-os](https://github.com/HegemanLab/ansible-galaxy-os)
+- [ansible-nginx](https://github.com/HegemanLab/ansible-nginx)
+- [ansible-postgresql](https://github.com/HegemanLab/ansible-postgresql)
+- [ansible-postgresql-objects](https://github.com/HegemanLab/ansible-postgresql-objects)
