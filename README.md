@@ -29,6 +29,6 @@ Rename every role to remove the prepended `ansible-`.
 |-------|----------------|
 | [HegemanLab/ansible-galaxy](https://github.com/HegemanLab/ansible-galaxy) | [GalaxyProject/asnible-galaxy](https://github.com/GalaxyProject/ansible-galaxy) |
 | [HegemanLab/ansible-galaxy-os](https://github.com/HegemanLab/ansible-galaxy-os) | |
-| [HegemanLab/ansible-nginx](https://github.com/HegemanLab/ansible-nginx) | [GalaxyProject fork](https://github.com/HegemanLab/ansible-nginx) |
-| [HegemanLab/ansible-postgresql](https://github.com/HegemanLab/ansible-postgresql) | [GalaxyProject fork](https://github.com/HegemanLab/ansible-postgresql) |
-| [HegemanLab/ansible-postgresql-objects](https://github.com/HegemanLab/ansible-postgresql-objects) | [natefoo fork](https://github.com/natefoo/ansible-postgresql-objects) |
+| [HegemanLab/ansible-nginx](https://github.com/HegemanLab/ansible-nginx) | [GalaxyProject/ansible-nginx](https://github.com/HegemanLab/ansible-nginx) |
+| [HegemanLab/ansible-postgresql](https://github.com/HegemanLab/ansible-postgresql) | [GalaxyProject/ansible-postgresql](https://github.com/HegemanLab/ansible-postgresql) |
+| [HegemanLab/ansible-postgresql-objects](https://github.com/HegemanLab/ansible-postgresql-objects) | [natefoo/ansible-postgresql-objects](https://github.com/natefoo/ansible-postgresql-objects) |
