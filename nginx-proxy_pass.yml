@@ -1,0 +1,10 @@
+---
+# use the proxy_pass branch of nginx for this playbook to run
+
+- name: 'Install and manage nginx'
+  hosts: galaxy-host
+  vars:
+    nginx_proxy_pass: http://127.0.0.1:9080
+  roles:
+    - nginx
+  tags: nginx
